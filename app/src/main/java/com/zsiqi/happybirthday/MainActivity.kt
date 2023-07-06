@@ -34,11 +34,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingPreview()
+                    HappyBirthday()
                 }
             }
         }
     }
+}
+
+@Composable
+fun HappyBirthday() {
+    BirthdayGreetingWithImage(
+        message = stringResource(R.string.happy_birthday_to_you),
+        from = stringResource(R.string.from)
+    )
 }
 
 @Composable
@@ -92,9 +100,6 @@ fun BirthdayGreetingWithText(message: String, from: String, modifier: Modifier =
 @Composable
 fun GreetingPreview() {
     HappyBirthdayTheme {
-        BirthdayGreetingWithImage(
-            message = stringResource(R.string.happy_birthday_to_you),
-            from = stringResource(R.string.from)
-        )
+        HappyBirthday()
     }
 }
