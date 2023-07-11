@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,6 +60,18 @@ fun BirthdayGreetingWithImage(message: String, from: String) {
             contentScale = ContentScale.Crop,
         )
         BirthdayGreetingWithText(message = message, from = from)
+    }
+}
+
+@Composable
+fun BirthdayGreetingButton(modifier: Modifier = Modifier){
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { /*TODO*/ }) {
+            Text("Celebrate")
+        }
     }
 }
 
