@@ -7,7 +7,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.style.TextAlign
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,10 +51,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HappyBirthday() {
-
     BirthdayGreetingWithImage(
-        message = stringResource(R.string.happy_birthday_to_you),
-        from = stringResource(R.string.from)
+        HappyBirthday = stringResource(R.string.happy_birthday_to_you),
+        from = stringResource(R.string.from),
+        message = stringResource(R.string.happy_birthday_to_stranger)
     )
     BirthdayGreetingButton()
 }
@@ -62,7 +65,7 @@ fun CelebrateText() {
 }
 
 @Composable
-fun BirthdayGreetingWithImage(message: String, from: String) {
+fun BirthdayGreetingWithImage(HappyBirthday: String, from: String, message: String) {
     val image = painterResource(R.drawable.androidparty)
     Box {
         Image(
@@ -70,7 +73,7 @@ fun BirthdayGreetingWithImage(message: String, from: String) {
             contentDescription = null,
             contentScale = ContentScale.Crop,
         )
-        BirthdayGreetingWithText(message = message, from = from)
+        BirthdayGreetingWithText(HappyBirthday = HappyBirthday, from = from, message = message)
     }
 }
 
@@ -82,10 +85,11 @@ fun BirthdayGreetingButton(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = modifier.height(100.dp))
         Button(onClick = {
             if (showText == 0) {
                 showText++
-            }else{
+            } else {
                 showText--
             }
         }) {
@@ -98,19 +102,24 @@ fun BirthdayGreetingButton(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BirthdayGreetingWithText(message: String, from: String, modifier: Modifier = Modifier) {
+fun BirthdayGreetingWithText(
+    HappyBirthday: String,
+    from: String,
+    message: String,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = message,
+            text = HappyBirthday,
             fontSize = 30.sp,
-            fontWeight = FontWeight(500),
-            modifier = Modifier.padding(
+            fontWeight = FontWeight(1000),
+            modifier = modifier.padding(
                 start = 16.dp,
-                top = 30.dp,
+                top = 50.dp,
                 end = 16.dp,
                 bottom = 16.dp
             )
@@ -118,8 +127,8 @@ fun BirthdayGreetingWithText(message: String, from: String, modifier: Modifier =
         Text(
             text = from,
             fontSize = 25.sp,
-            fontWeight = FontWeight(400),
-            modifier = Modifier
+            fontWeight = FontWeight(600),
+            modifier = modifier
                 .align(
                     alignment = Alignment.End
                 )
@@ -127,6 +136,15 @@ fun BirthdayGreetingWithText(message: String, from: String, modifier: Modifier =
                     top = 16.dp,
                     end = 30.dp
                 )
+        )
+        Spacer(modifier = modifier.height(50.dp))
+        Text(
+            text = message,
+            fontWeight = FontWeight(1000),
+            textAlign = TextAlign.Center,
+            modifier = modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(start = 30.dp, end = 30.dp)
         )
     }
 }
