@@ -14,6 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,6 +26,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +40,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     HappyBirthday()
-                    BirthdayGreetingButton()
                 }
             }
         }
@@ -45,10 +48,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HappyBirthday() {
+
     BirthdayGreetingWithImage(
         message = stringResource(R.string.happy_birthday_to_you),
         from = stringResource(R.string.from)
     )
+    BirthdayGreetingButton()
+}
+
+@Composable
+fun CelebrateText() {
+    Text(text = "text")
 }
 
 @Composable
@@ -65,14 +75,25 @@ fun BirthdayGreetingWithImage(message: String, from: String) {
 }
 
 @Composable
-fun BirthdayGreetingButton(modifier: Modifier = Modifier){
+fun BirthdayGreetingButton(modifier: Modifier = Modifier) {
+    var showText by remember { mutableStateOf(0) }
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {
+            if (showText == 0) {
+                showText++
+            }else{
+                showText--
+            }
+        }) {
             Text("Celebrate")
         }
+    }
+    if (showText == 1) {
+        CelebrateText()
     }
 }
 
@@ -98,14 +119,14 @@ fun BirthdayGreetingWithText(message: String, from: String, modifier: Modifier =
             text = from,
             fontSize = 25.sp,
             fontWeight = FontWeight(400),
-            modifier  = Modifier
-            .align(
-                alignment = Alignment.End
-            )
-            .padding(
-                top = 16.dp,
-                end = 30.dp
-            )
+            modifier = Modifier
+                .align(
+                    alignment = Alignment.End
+                )
+                .padding(
+                    top = 16.dp,
+                    end = 30.dp
+                )
         )
     }
 }
