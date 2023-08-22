@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -60,11 +61,6 @@ fun HappyBirthday() {
 }
 
 @Composable
-fun CelebrateText() {
-    Text(text = "text")
-}
-
-@Composable
 fun BirthdayGreetingWithImage(HappyBirthday: String, from: String, message: String) {
     val image = painterResource(R.drawable.androidparty)
     Box {
@@ -78,26 +74,44 @@ fun BirthdayGreetingWithImage(HappyBirthday: String, from: String, message: Stri
 }
 
 @Composable
+fun BirthdayGreetingCake(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .height(300.dp)
+            .width(300.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.cake),
+            contentDescription = null,
+            contentScale = ContentScale.Inside
+        )
+    }
+}
+
+@Composable
 fun BirthdayGreetingButton(modifier: Modifier = Modifier) {
-    var showText by remember { mutableStateOf(0) }
+    var showCelebrate by remember { mutableStateOf(1) }
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = modifier.height(100.dp))
+        Spacer(modifier = modifier.height(270.dp))
+        if (showCelebrate == 2){
+            BirthdayGreetingCake()
+        }
+        Spacer(modifier = modifier.height(20.dp))
         Button(onClick = {
-            if (showText == 0) {
-                showText++
+            if (showCelebrate == 1) {
+                showCelebrate++
             } else {
-                showText--
+                showCelebrate--
             }
         }) {
-            Text("Celebrate")
+            Text(stringResource(R.string.celebrate))
         }
-    }
-    if (showText == 1) {
-        CelebrateText()
     }
 }
 
