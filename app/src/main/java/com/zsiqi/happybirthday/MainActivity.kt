@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HappyBirthday() {
     BirthdayGreetingWithImage(
-        HappyBirthday = stringResource(R.string.happy_birthday_to_you),
+        happyBirthday = stringResource(R.string.happy_birthday_to_you),
         from = stringResource(R.string.from),
         message = stringResource(R.string.happy_birthday_to_stranger)
     )
@@ -61,7 +61,7 @@ fun HappyBirthday() {
 }
 
 @Composable
-fun BirthdayGreetingWithImage(HappyBirthday: String, from: String, message: String) {
+fun BirthdayGreetingWithImage(happyBirthday: String, from: String, message: String) {
     val image = painterResource(R.drawable.androidparty)
     Box {
         Image(
@@ -69,7 +69,7 @@ fun BirthdayGreetingWithImage(HappyBirthday: String, from: String, message: Stri
             contentDescription = null,
             contentScale = ContentScale.Crop,
         )
-        BirthdayGreetingWithText(HappyBirthday = HappyBirthday, from = from, message = message)
+        BirthdayGreetingWithText(happyBirthday = happyBirthday, from = from, message = message)
     }
 }
 
@@ -117,7 +117,7 @@ fun BirthdayGreetingButton(modifier: Modifier = Modifier) {
 
 @Composable
 fun BirthdayGreetingWithText(
-    HappyBirthday: String,
+    happyBirthday: String,
     from: String,
     message: String,
     modifier: Modifier = Modifier
@@ -128,7 +128,7 @@ fun BirthdayGreetingWithText(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = HappyBirthday,
+            text = happyBirthday,
             fontSize = 30.sp,
             fontWeight = FontWeight(1000),
             modifier = modifier.padding(
